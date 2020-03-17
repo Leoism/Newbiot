@@ -18,8 +18,11 @@ client.on('message', async msg => {
   if (regexResult) {
     let defNum = regexResult[2] || 1;
     let def = await ud.lookUp(regexResult[1], regexResult[2], defNum);
-    let formattedText = regexResult[1].trim() + ":\n" + def;
-    msg.channel.send(formattedText);
+    const embedText = new Discord.MessageEmbed()
+      .setColor('#0099ff')
+      .setTitle(regexResult[1])
+      .setDescription(def);
+    msg.channel.send(embedText);
   }
 });
 
